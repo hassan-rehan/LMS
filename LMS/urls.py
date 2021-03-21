@@ -29,5 +29,7 @@ urlpatterns = [
     path('user/<int:id>/',include('students.urls')),
 ]
 
+admin.site.site_header = 'LMS Administration'
+
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

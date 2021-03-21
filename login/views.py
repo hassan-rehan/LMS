@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
 
 def signin(request):
     if request.user.is_authenticated:
@@ -13,6 +14,7 @@ def signin(request):
             login(request, user)
             return redirect('/')
         else:
+            messages.success(request,'Your username or password is incorrect.')
             form = AuthenticationForm(request.POST)
             return render(request, 'signin.html', {'form': form})
     else:

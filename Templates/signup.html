@@ -115,7 +115,15 @@
 				   		</div>
 					</form>
 				</div>
-                {{form.errors}}
+				<div id="errors" class="alert alert-danger" style="margin-top: 10px;">
+				{% if form.errors %}
+					{% for field in form %}
+						{% for error in field.errors %}
+							{{ error|escape }}
+						{% endfor %}
+					{% endfor %}
+				{% endif %}
+				</div>
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
 						Already have an account? <a href="{% url 'login' %}" class="ml-2">Login</a>

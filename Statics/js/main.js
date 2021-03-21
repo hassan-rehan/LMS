@@ -5,8 +5,10 @@ $(document).ready(function() {
 
 		if (scroll >= 50) {
 			$('#header').addClass('fixed');
+			$('.nav-clearfix').addClass('nav-clearfix-scroll');
 		} else {
 			$('#header').removeClass('fixed');
+			$('.nav-clearfix').removeClass('nav-clearfix-scroll');
 		}
 	});
 
@@ -64,5 +66,12 @@ $(document).ready(function() {
 	nav.find('a').on('click', function() {
 		$('.nav-toggle').toggleClass('close-nav');
 		nav.toggleClass('open');
+	});
+
+	$("#messages").fadeTo(5000, 500).slideUp(500, function(){
+		$("#messages").slideUp(600);
+	});
+	$("#errors").fadeTo(5000, 500).slideUp(500, function(){
+		$("#errors").slideUp(600);
 	});
 });

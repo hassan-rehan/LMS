@@ -1,6 +1,18 @@
+html{
+    scroll-behavior: smooth;
+}
+
 #messages{
     background-color: grey;
     color: #fff;
     padding: 10px;
-    margin-top: 10px;
+}
+
+.nav-clearfix{
+    height: 105px;
+    background-color: #292c47; 
+}
+
+.nav-clearfix-scroll{
+    height: 74px !important;
 }
