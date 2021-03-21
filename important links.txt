@@ -1,0 +1,5 @@
+https://towardsdatascience.com/recommendation-system-in-python-lightfm-61c85010ce17
+
+https://venturebeat.com/2019/11/30/a-super-fast-machine-learning-model-for-finding-user-search-intent/
+
+https://www.smashingmagazine.com/2020/02/django-highlights-user-models-authentication/

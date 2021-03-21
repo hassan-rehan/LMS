@@ -19,6 +19,6 @@ def signin(request):
         form = AuthenticationForm()
         return render(request, 'signin.html', {'form': form})
 
-def signout(request):
+def logout(request):
     logout(request)
     return redirect('/')
