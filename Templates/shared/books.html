@@ -1,0 +1,20 @@
+{% if books %}
+    {% for book in books %}
+        <div class="col-lg-3 col-md-6 mb-3" id="latest-book-{{ book.id }}">
+            <div class="book-store-item">
+                <img src="{{ book.cover_pic.url }}" alt="img">
+                <h3 class="book-title">{{ book.title }}</h3>
+                {% if book.reserved_by %}
+                    <span class="sale">Reserved</span>
+                {% else %}
+                    <span class="sale">Available</span>
+                {% endif %}
+                <div class="hover">
+                    <a href="/{{ user.id }}/library/book/{{ book.id }}">
+                        <span><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

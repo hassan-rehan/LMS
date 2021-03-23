@@ -23,15 +23,21 @@ class CategoryField(models.CharField):
         return str(value).lower()
 
 class book_category(models.Model):
-    category = CategoryField(max_length=100)
+    category = CategoryField(max_length=100,unique=True)
+
+
+class reservation(models.Model):
+    reserved_at = models.DateTimeField(auto_now_add=True)
+    reserved_by = models.ForeignKey(User,db_column="reserved_by",on_delete=models.CASCADE)
 
 class book(models.Model):
     description = models.TextField()
     cover_pic = models.ImageField(upload_to=path_and_rename)
     title = models.CharField(max_length=100)
     category_id = models.ForeignKey(book_category,db_column="category_id", on_delete=models.CASCADE)
-    reserved_by = models.ForeignKey(User,db_column="reserved_by",null=True,blank=True,on_delete=models.DO_NOTHING)
-    shelf_no = models.IntegerField(null=True,blank=True)
+    reservation_id = models.ForeignKey(reservation,db_column="reservation_id",null=True,blank=True,on_delete=models.SET_NULL)
+    shelf_no = models.IntegerField()
+    asin_no = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
     clicks = models.IntegerField(null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

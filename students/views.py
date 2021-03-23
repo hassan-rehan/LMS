@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from .forms import UserEditForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
+from librarian.models import book
 
 def librarypage(request,id):
     if request.user.is_authenticated:
-        return render(request, 'librarypage.html')
+        latest_books = book.objects.all()
+        return render(request, 'librarypage.html',{'latest_books' : latest_books})
     else:
         return redirect("/")
 
