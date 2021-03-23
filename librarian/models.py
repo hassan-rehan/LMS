@@ -15,15 +15,15 @@ def path_and_rename(instance, filename):
     # return the whole path to the file
     return os.path.join(upload_to, filename)
 
-class CategoryField(models.CharField):
+class SmallCharField(models.CharField):
     def __init__(self, *args, **kwargs):
-        super(CategoryField, self).__init__(*args, **kwargs)
+        super(SmallCharField, self).__init__(*args, **kwargs)
 
     def get_prep_value(self, value):
         return str(value).lower()
 
 class book_category(models.Model):
-    category = CategoryField(max_length=100,unique=True)
+    category = SmallCharField(max_length=100,unique=True)
 
 
 class reservation(models.Model):
@@ -33,12 +33,12 @@ class reservation(models.Model):
 class book(models.Model):
     description = models.TextField()
     cover_pic = models.ImageField(upload_to=path_and_rename)
-    title = models.CharField(max_length=100)
+    title = SmallCharField(max_length=100)
     category_id = models.ForeignKey(book_category,db_column="category_id", on_delete=models.CASCADE)
     reservation_id = models.ForeignKey(reservation,db_column="reservation_id",null=True,blank=True,on_delete=models.SET_NULL)
     shelf_no = models.IntegerField()
-    asin_no = models.CharField(max_length=100)
-    author = models.CharField(max_length=100)
+    asin_no = SmallCharField(max_length=100)
+    author = SmallCharField(max_length=100)
     clicks = models.IntegerField(null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
