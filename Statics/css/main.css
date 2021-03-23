@@ -74,11 +74,15 @@ ul, ol {
 ul li {
   list-style: none; }
 
-.section {
-  padding: 100px 0; }
-
-.no-padding {
-  padding: 0; }
+.section-heading {
+  padding: 30px 0;
+  margin: 0;
+  text-align: center;
+  color: #151515;
+  font-size: 50px;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+ }
 
 .no-gutter [class*=col-] {
   padding-right: 0;
@@ -411,7 +415,7 @@ ul li {
 /* ==========================================================================
 	$Testimonials
 ========================================================================== */
-.testimonials {
+.testimonials .container-fluid {
   background-color: #53354a;
   position: relative; }
   .testimonials blockquote {
