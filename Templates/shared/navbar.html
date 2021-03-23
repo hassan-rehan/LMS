@@ -1,7 +1,7 @@
 {% load static %}
 <header id="header">
   <div class="header-content clearfix">
-      <a class="logo" href="#"><img src="{% static 'images/logo.png' %}" alt=""></a>
+      <a class="logo" id="nav-logo" href="#"><img src="{% static 'images/logo.png' %}" alt=""></a>
       <nav class="navigation" role="navigation">
           <ul class="primary-nav">
               {% if user.is_authenticated %}
@@ -18,10 +18,10 @@
                 </div>
               </li>
               {% else %}
-                <li><a href="#features">Features</a></li>
-                <li><a href="#works">Works</a></li>
-                <li><a href="#teams">Our Team</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a id="nav-features-link" href="#features">Features</a></li>
+                <li><a id="nav-rb-link" href="#recent-books">Recent Books</a></li>
+                <li><a id="nav-teams-link" href="#teams">Our Team</a></li>
+                <li><a id="nav-testimonials-link" href="#testimonials">Testimonials</a></li>
                 <li><a href="/login">Login</a></li>
                 <li><a href="/register">Signup</a></li>
               {% endif %}

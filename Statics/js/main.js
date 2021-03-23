@@ -50,11 +50,15 @@ $(document).ready(function() {
 	});
 	nav.find('a').on('click', function () {
 	  	var $el = $(this)
-	    	id = $el.attr('href');
-		$('html, body').animate({
-			scrollTop: $(id).offset().top - 75
-		}, 500);
-	  return false;
+	    id = $el.attr('href');
+		if($(id).length){
+			$('html, body').animate({
+				scrollTop: $(id).offset().top - 75
+			}, 500);
+			return false;
+		}
+		else
+			window.location.replace('/'+id);
 	});
 
 	// Mobile Navigation
@@ -74,4 +78,19 @@ $(document).ready(function() {
 	$("#errors").fadeTo(5000, 500).slideUp(500, function(){
 		$("#errors").slideUp(600);
 	});
+
+	$('#nav-logo').click(function(e){
+		e.preventDefault();
+		if($("section#banners").length){
+		$('html, body').animate({ scrollTop: $("section#banners").offset().top - 75 });
+		}
+		else
+			window.location.replace('/');
+	});
+	
+	if($(window.location.hash).length > 0){
+		setTimeout(() => {
+			$('html, body').animate({ scrollTop: $(window.location.hash).offset().top - 75 });
+		}, 1500);
+	}
 });
