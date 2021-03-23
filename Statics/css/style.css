@@ -151,15 +151,6 @@ html{
     text-transform: uppercase;
 }
 
-@media only screen and (max-width: 800px) {
-    .book-desc-sec .img-sec {
-        margin-bottom: 30px;
-    }
-    .book-desc-sec .book-content p {
-        font-size: 16px;
-    }
-}
-
 .book-desc-sec .btn-sec {
     width: 100%;
     clear: both;
@@ -218,4 +209,17 @@ html{
 }
 .input-group-append,.input-group-prepend{
     border: 1px solid #ced4da;
+}
+
+/* Media queries */ 
+@media only screen and (max-width: 800px) {
+    .book-desc-sec .img-sec {
+        margin-bottom: 30px;
+    }
+    .book-desc-sec .book-content p {
+        font-size: 16px;
+    }
+    .input-group-prepend .btn label{
+        max-width: 85px !important;
+    }
 }
