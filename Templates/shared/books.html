@@ -4,7 +4,7 @@
             <div class="book-store-item">
                 <img src="{{ book.cover_pic.url }}" alt="img">
                 <h3 class="book-title">{{ book.title }}</h3>
-                {% if book.reserved_by %}
+                {% if book.reservation_id %}
                     <span class="sale">Reserved</span>
                 {% else %}
                     <span class="sale">Available</span>

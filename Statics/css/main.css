@@ -1,59 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700);
 @import url(http://fonts.googleapis.com/css?family=Cardo:400,400italic,700);
-/* ==========================================================================
-Typography
-========================================================================== */
-p {
-  font-size: 14px;
-  line-height: 22.4px;
-  color: #6c7279; }
-
-h1 {
-  font-size: 65px;
-  color: #2d3033; }
-
-h2 {
-  font-size: 40px;
-  color: #2d3033; }
-
-h3 {
-  font-size: 28px;
-  color: #2d3033;
-  font-weight: 300; }
-
-h4 {
-  font-size: 22px;
-  color: #2d3033;
-  font-weight: 400; }
-
-h5 {
-  font-size: 14px;
-  color: #2d3033;
-  text-transform: uppercase;
-  font-weight: 700; }
-
-.btn {
-  background-color: #e84545;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  border: 0;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  display: inline-block;
-  text-transform: uppercase; }
-  .btn:hover, .btn:focus {
-    background-color: #e52e2e;
-    color: #fff; }
-  .btn-large {
-    padding: 15px 40px; }
 
 /* ==========================================================================
 	General Styles
 ========================================================================== */
 a {
-  color: #e84545; }
+  color: #151515; 
+}
 
 a:hover, a:focus {
   text-decoration: none;
@@ -434,18 +387,6 @@ ul li {
     font-weight: 600;
     margin-top: 25px;
     text-transform: uppercase; }
-
-/* ==========================================================================
-	$Download
-========================================================================== */
-.download h3 {
-  margin-top: 0; }
-.download p {
-  color: #2d3033;
-  font-weight: 600;
-  text-transform: uppercase; }
-.download .btn {
-  margin-top: 30px; }
 
 /* ==========================================================================
 	$Footer

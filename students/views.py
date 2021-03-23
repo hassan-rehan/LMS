@@ -5,9 +5,16 @@ from django.contrib import messages
 from librarian.models import book
 
 def librarypage(request,id):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.id == id:
         latest_books = book.objects.all()
         return render(request, 'librarypage.html',{'latest_books' : latest_books})
+    else:
+        return redirect("/")
+
+def book_detail(request,id,bid):
+    if request.user.is_authenticated and request.user.id == id:
+        book_data = book.objects.get(id=bid)
+        return render(request, 'book_detail.html',{'book_data' : book_data})
     else:
         return redirect("/")
 

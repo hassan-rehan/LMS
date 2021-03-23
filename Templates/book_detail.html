@@ -1,0 +1,37 @@
+{% extends 'landing-base.html' %}
+
+{% block content %}
+    <div class="container text-center mb-5"> 
+        <section class="book-desc-sec">
+            {% if book_data %}
+                <h1 class="section-heading">{{ book_data.title }}</h1>
+                <div class="row">
+                    <div class="col-md-5 img-sec">
+                        <img src="{{ book_data.cover_pic.url }}">
+                    </div>
+                    <div class="col-md-7 book-content">
+                        <p>{{ book_data.description }}</p>
+                        <ul>
+                            <li>
+                                {% if book_data.reservation_id %}
+                                    <span class="type">Reserved</span>
+                                {% else %}
+                                    <span class="type">Available</span>
+                                {% endif %}
+                            </li>
+                        </ul>
+                        {% if not book_data.reservation_id %}
+                            <div class="btn-sec">
+                                <a class="btn" id="reserve-button">Reserve</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-success my-auto" role="alert" id="post-sub-message" style="text-align:center;">
+                    <h4>Book not found.</h4>
+                </div>
+            {% endif %}
+        </section>
+    </div>
+{% endblock %}

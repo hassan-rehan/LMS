@@ -2,7 +2,6 @@ $(document).ready(function() {
 	// Header Scroll
 	$(window).on('scroll', function() {
 		var scroll = $(window).scrollTop();
-
 		if (scroll >= 50) {
 			$('#header').addClass('fixed');
 			$('.nav-clearfix').addClass('nav-clearfix-scroll');
@@ -93,4 +92,20 @@ $(document).ready(function() {
 			$('html, body').animate({ scrollTop: $(window.location.hash).offset().top - 75 });
 		}, 1500);
 	}
+
+	$('.search-panel .dropdown-menu').find('a').click(function(e) {
+		e.preventDefault();
+		var param = $(this).attr("href").replace("#","");
+		var concept = $(this).text();
+		$('.search-panel label#search_concept').text(concept);
+		$('.input-group #search_param').val(param);
+	});
 });
+
+if(document.getElementById('search').length){
+	document.getElementById('search').on('keyup', function(evt){
+		if(evt.keycode === 13){
+			alert('You pressed enter');
+		} 
+	}); 
+}
