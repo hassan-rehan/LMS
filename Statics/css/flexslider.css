@@ -186,7 +186,7 @@ html[xmlns] .flexslider .slides {
 .flex-control-nav {
   width: 50%;
   position: absolute;
-  bottom: 100px;
+  bottom: 12px;
   right: 0;
   text-align: center;
   z-index: 100;

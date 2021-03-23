@@ -5,22 +5,22 @@ from django.contrib import messages
 
 def signin(request):
     if request.user.is_authenticated:
-        return render(request, 'homepage.html')
+        return redirect('/')
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/')
+            messages.success(request, user.first_name.upper()+', You successfully login into your account.')
+            return redirect('/'+str(user.id)+'/library')
         else:
             messages.success(request,'Your username or password is incorrect.')
-            form = AuthenticationForm(request.POST)
-            return render(request, 'signin.html', {'form': form})
+            return redirect('/login')
     else:
         form = AuthenticationForm()
         return render(request, 'signin.html', {'form': form})
 
-def logout(request):
+def signout(request):
     logout(request)
     return redirect('/')

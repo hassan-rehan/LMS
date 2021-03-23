@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns, static
 from django.conf import settings
-from login.views import logout
+from login import views as login_view
 from . import views
 
 urlpatterns = [
@@ -25,8 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/',include('registration.urls')),
     path('login/',include('login.urls')),
-    path('logout/',logout,name="logout"),
-    path('user/<int:id>/',include('students.urls')),
+    path('logout/',login_view.signout,name="logout"),
+    path('<int:id>/',include('students.urls')),
 ]
 
 admin.site.site_header = 'LMS Administration'

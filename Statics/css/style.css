@@ -6,6 +6,7 @@ html{
     background-color: grey;
     color: #fff;
     padding: 10px;
+    margin: 0;
 }
 
 .nav-clearfix{

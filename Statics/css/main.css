@@ -134,6 +134,14 @@ ul li {
     .navigation a:hover, .navigation a.active {
       color: #fff; }
 
+.navigation .dropdown-menu a {
+  margin-left: 0 !important;
+  color: black !important;
+}
+.navigation .dropdown-menu a:hover {
+  background-color: lightgray !important;
+}
+  
 .nav-toggle {
   display: none;
   height: 44px;
@@ -409,7 +417,7 @@ ul li {
   .testimonials blockquote {
     border: 0;
     margin: 0;
-    padding: 100px 15% 0; }
+    padding: 50px 15% 0; }
   .testimonials p {
     color: #fff;
     font: italic 36px "Cardo", Georgia, "Times New Roman", serif; }
