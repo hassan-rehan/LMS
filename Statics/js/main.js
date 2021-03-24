@@ -100,12 +100,12 @@ $(document).ready(function() {
 		$('.search-panel label#search_concept').text(concept);
 		$('.input-group #search_param').val(param);
 	});
-});
 
-if(document.getElementById('search').length){
-	document.getElementById('search').on('keyup', function(evt){
-		if(evt.keycode === 13){
-			alert('You pressed enter');
-		} 
-	}); 
-}
+	if($('#search').length){
+		$('#search').on('keyup', function(evt){
+			if(evt.keyCode === 13){
+				alert('You pressed enter');
+			} 
+		}); 
+	}
+});
