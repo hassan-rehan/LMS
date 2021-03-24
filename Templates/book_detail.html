@@ -1,6 +1,7 @@
 {% extends 'landing-base.html' %}
 
 {% block content %}
+{% csrf_token %}
     <div class="container text-center mb-5"> 
         <section class="book-desc-sec">
             {% if book_data %}
@@ -22,7 +23,7 @@
                         </ul>
                         {% if not book_data.reservation_id %}
                             <div class="btn-sec">
-                                <a class="btn" id="reserve-button">Reserve</a>
+                                <a class="btn" href="{% url 'reserve_book' id=user.id bid=book_data.id %}" id="reserve-button">Reserve</a>
                             </div>
                         {% endif %}
                     </div>

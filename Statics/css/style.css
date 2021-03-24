@@ -3,14 +3,22 @@ html{
 }
 
 .pagination{
-    justify-content: centerz;
+    justify-content: center;
 }
-
+.search-dropdown-category:first-letter{
+    text-transform: capitalize;
+}
 #messages{
     background-color: grey;
     color: #fff;
     padding: 10px;
     margin: 0;
+}
+
+.landing-rbs-img{
+    max-height: 350px;
+    object-fit: cover;
+    width: 100%;
 }
 
 .nav-clearfix{
@@ -107,7 +115,8 @@ html{
         font-size: 25px;
     }
     .testimonial_img{
-        height: 275px !important;
+        height: 300px !important;
+        object-fit: cover;
     }
   }
 

@@ -93,6 +93,39 @@ $(document).ready(function() {
 		}, 1500);
 	}
 
+	//Updating book clicks
+	$(".store-book-link").click(function(){
+		$.post($(this).attr('href')+'/update-clicks', 
+			{csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()},
+			function(data){
+				if(data="success")
+					console.log("Clicks updated successfully.");
+				else
+					console.log("Clicks not updated successfully.");
+			}
+		);
+	});
+
+	//book reservation
+	$("#reserve-button").click(function(e){
+		e.preventDefault();
+		var btn = $(this);
+		btn.attr('disabled',true);
+		btn.html('<i class="fas fa-spinner fa-spin"></i>');
+		$.post(btn.attr('href'), 
+			{csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()},
+			function(data){
+				if(data="success"){
+					btn.html("Reserved successfully.");
+				}
+				else{
+					btn.attr('disabled',false);
+					alert(data);
+				}
+			}
+		);
+	});
+
 	$('.search-panel .dropdown-menu').find('a').click(function(e) {
 		e.preventDefault();
 		var param = $(this).attr("href").replace("#","");
@@ -100,7 +133,7 @@ $(document).ready(function() {
 		$('.search-panel label#search_concept').text(concept);
 		$('.input-group #search_param').val(param);
 	});
-
+	
 	if($('#search').length){
 		$('#search').on('keyup', function(evt){
 			if(evt.keyCode === 13){

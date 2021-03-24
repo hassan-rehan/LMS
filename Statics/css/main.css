@@ -260,7 +260,7 @@ ul li {
   min-height: 750px; }
 
 .banner-text {
-  padding-top: 25%; }
+  padding-top: 23%; }
   .banner-text h1 {
     color: #fff;
     font-family: "Open Sans", sans-serif;
@@ -393,7 +393,7 @@ ul li {
 	$Testimonials
 ========================================================================== */
 .testimonials .container-fluid {
-  background-color: #53354a;
+  background-color: #3a3e64;
   position: relative; }
   .testimonials blockquote {
     border: 0;

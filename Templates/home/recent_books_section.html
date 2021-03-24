@@ -3,94 +3,19 @@
     <h1 class="section-heading">RECENT BOOKS</h1>
     <div class="container-fluid">
         <div class="row no-gutter">
+            {% for book in books %}
             <div class="col-lg-3 col-md-6 col-sm-6 work">
-                <a href="{% static 'images/work-1.jpg' %}" class="work-box">
-                    <img src="{% static 'images/work-1.jpg' %}" alt="">
+                <a href="{{ book.cover_pic.url }}" class="work-box">
+                    <img class="landing-rbs-img" src="{{ book.cover_pic.url }}" alt="img">
                     <div class="overlay">
                         <div class="overlay-caption">
-                            <h5>Project Name</h5>
-                            <p>Website Design</p>
+                            <h5>{{ book.title }}</h5>
+                            <p>{{ book.author }}</p>
                         </div>
                     </div><!-- overlay -->
                 </a>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 work">
-                <a href="{% static 'images/work-2.jpg' %}" class="work-box">
-                    <img src="{% static 'images/work-2.jpg' %}" alt="">
-                    <div class="overlay">
-                        <div class="overlay-caption">
-                            <h5>Project Name</h5>
-                            <p>Website Design</p>
-                        </div>
-                    </div><!-- overlay -->
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 work">
-                <a href="{% static 'images/work-3.jpg' %}" class="work-box">
-                    <img src="{% static 'images/work-3.jpg' %}" alt="">
-                    <div class="overlay">
-                        <div class="overlay-caption">
-                            <h5>Project Name</h5>
-                            <p>Website Design</p>
-                        </div>
-                    </div><!-- overlay -->
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 work">
-                <a href="{% static 'images/work-4.jpg' %}" class="work-box">
-                    <img src="{% static 'images/work-4.jpg' %}" alt="">
-                    <div class="overlay">
-                        <div class="overlay-caption">
-                            <h5>Project Name</h5>
-                            <p>Website Design</p>
-                        </div>
-                    </div><!-- overlay -->
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 work">
-                <a href="{% static 'images/work-5.jpg' %}" class="work-box">
-                    <img src="{% static 'images/work-5.jpg' %}" alt="">
-                    <div class="overlay">
-                        <div class="overlay-caption">
-                            <h5>Project Name</h5>
-                            <p>Website Design</p>
-                        </div>
-                    </div><!-- overlay -->
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 work">
-                <a href="{% static 'images/work-6.jpg' %}" class="work-box">
-                    <img src="{% static 'images/work-6.jpg' %}" alt="">
-                    <div class="overlay">
-                        <div class="overlay-caption">
-                            <h5>Project Name</h5>
-                            <p>Website Design</p>
-                        </div>
-                    </div><!-- overlay -->
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 work">
-                <a href="{% static 'images/work-7.jpg' %}" class="work-box">
-                    <img src="{% static 'images/work-7.jpg' %}" alt="">
-                    <div class="overlay">
-                        <div class="overlay-caption">
-                            <h5>Project Name</h5>
-                            <p>Website Design</p>
-                        </div>
-                    </div><!-- overlay -->
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 work">
-                <a href="{% static 'images/work-8.jpg' %}" class="work-box">
-                    <img src="{% static 'images/work-8.jpg' %}" alt="">
-                    <div class="overlay">
-                        <div class="overlay-caption">
-                            <h5>Project Name</h5>
-                            <p>Website Design</p>
-                        </div>
-                    </div><!-- overlay -->
-                </a>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section><!-- works -->

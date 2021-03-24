@@ -7,22 +7,9 @@
                         <label id="search_concept">All</label>
                     </button>
                     <ul class="dropdown-menu scrollable-dropdown" role="menu">
-                        <li><a href="#">Automotive Accesories</a></li>
-                        <li><a href="#">Cell Phone Accesories</a></li>
-                        <li><a href="#">Computer Accesories</a></li>
-                        <li><a href="#">Health and Personal Care</a></li>
-                        <li><a href="#">Automotive Accesories</a></li>
-                        <li><a href="#">Cell Phone Accesories</a></li>
-                        <li><a href="#">Computer Accesories</a></li>
-                        <li><a href="#">Health and Personal Care</a></li>
-                        <li><a href="#">Automotive Accesories</a></li>
-                        <li><a href="#">Cell Phone Accesories</a></li>
-                        <li><a href="#">Computer Accesories</a></li>
-                        <li><a href="#">Health and Personal Care</a></li>
-                        <li><a href="#">Automotive Accesories</a></li>
-                        <li><a href="#">Cell Phone Accesories</a></li>
-                        <li><a href="#">Computer Accesories</a></li>
-                        <li><a href="#">Health and Personal Care</a></li>
+                        {% for item in items %}
+                            <li class="search-dropdown-category"><a id="category-{{ item.id }}" href="#">{{ item.category }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <input type="hidden" name="search_param" value="all" id="search_param">

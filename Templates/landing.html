@@ -3,7 +3,7 @@
 {% block content %}
     {% include "home/banner_section.html" %}
     {% include "home/feature_section.html" %}
-    {% include "home/recent_books_section.html" %}
+    {% include "home/recent_books_section.html" with books=recent_books %}
     {% include "home/testimonials_section.html" %}
     {% include "home/team_section.html" %}
 {% endblock %}

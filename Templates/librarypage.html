@@ -1,14 +1,22 @@
 {% extends 'landing-base.html' %}
 
 {% block content %}
+{% csrf_token %}
 <div class="container text-center mb-5">
-    {% include "shared/searchbar.html" %}
-    <section class="new-books-sec" id="new-book-section">
-        <h1 class="section-heading">New books in library</h1>
+    {% include "shared/searchbar.html" with items=categories %}
+    <section class="books-sec" id="new-book-section">
+        <h1 class="section-heading">New books</h1>
         <div class="row">
             {% include 'shared/books.html' with books=latest_books %}
         </div>
         {% include 'shared/pagi_links.html' with books=latest_books %}
+    </section>
+    <section class="books-sec" id="recommended-book-section">
+        <h1 class="section-heading">Recommended books</h1>
+        <div class="row">
+            {% include 'shared/books.html' with books=recommended_books %}
+        </div>
+        {% include 'shared/pagi_links.html' with books=recommended_books %}
     </section>
 </div>
 {% endblock %}
