@@ -1,0 +1,17 @@
+<div class="pagination">
+    <span class="step-links">
+        {% if books.has_previous %}
+            <a href="{% url 'library_page' id=user.id %}?page=1">&laquo; first</a>
+            <a href="{% url 'library_page' id=user.id %}?page={{ books.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ books.number }} of {{ books.paginator.num_pages }}.
+        </span>
+
+        {% if books.has_next %}
+            <a href="{% url 'library_page' id=user.id %}?page={{ books.next_page_number }}">next</a>
+            <a href="{% url 'library_page' id=user.id %}?page={{ books.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>

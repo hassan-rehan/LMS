@@ -10,15 +10,14 @@ def librarypage(request,id):
         latest_books = book.objects.all()
         page_num = request.GET.get("page",1)
         #initializing paginator
-        p = Paginator(latest_books,20)
-        total_pages = p.num_pages
+        p = Paginator(latest_books,20) #20 products per page
         #handling page number OutOfBound
         try:
             page = p.page(page_num)
-        except EmptyPage:
+        except:
             page = p.page(1)
         
-        return render(request, 'librarypage.html',{'latest_books' : page, 'total_pages' : total_pages})
+        return render(request, 'librarypage.html',{'latest_books' : page})
     else:
         return redirect("/")
 

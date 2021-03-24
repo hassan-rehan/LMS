@@ -2,6 +2,10 @@ html{
     scroll-behavior: smooth;
 }
 
+.pagination{
+    justify-content: centerz;
+}
+
 #messages{
     background-color: grey;
     color: #fff;
