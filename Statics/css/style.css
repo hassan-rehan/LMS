@@ -46,6 +46,7 @@ html{
     text-overflow: ellipsis;
     opacity: 0.6;
     color: inherit;
+    white-space: nowrap;
   }
   
   .book-store-item .hover {

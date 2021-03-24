@@ -5,7 +5,10 @@
 	General Styles
 ========================================================================== */
 a {
-  color: #151515; 
+  color: #292c47; 
+}
+a:hover, a:focus {
+  color: #3a3e64; 
 }
 
 a:hover, a:focus {
