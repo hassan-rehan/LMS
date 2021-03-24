@@ -8,6 +8,12 @@
         <div class="row">
             {% include 'shared/books.html' with books=latest_books %}
         </div>
+        {% if latest_books.has_previous %}
+            <a href="{% url 'library_page' %}?page={latest_books.previous_page_number}">Previous Page</a>
+        {% endif %}
+        {% if latest_books.has_next %}
+            <a href="{% url 'library_page' %}?page={latest_books.next_page_number}">Next Page</a>
+        {% endif %}
     </section>
 </div>
 {% endblock %}

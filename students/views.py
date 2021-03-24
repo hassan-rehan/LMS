@@ -3,11 +3,22 @@ from .forms import UserEditForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from librarian.models import book
+from django.core.paginator import Paginator
 
 def librarypage(request,id):
     if request.user.is_authenticated and request.user.id == id:
         latest_books = book.objects.all()
-        return render(request, 'librarypage.html',{'latest_books' : latest_books})
+        page_num = request.GET.get("page",1)
+        #initializing paginator
+        p = Paginator(latest_books,20)
+        total_pages = p.num_pages
+        #handling page number OutOfBound
+        try:
+            page = p.page(page_num)
+        except EmptyPage:
+            page = p.page(1)
+        
+        return render(request, 'librarypage.html',{'latest_books' : page, 'total_pages' : total_pages})
     else:
         return redirect("/")
 
