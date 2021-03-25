@@ -110,7 +110,7 @@ $(document).ready(function() {
 	$("#reserve-button").click(function(e){
 		e.preventDefault();
 		var btn = $(this);
-		btn.attr('disabled',true);
+		btn.prop('disabled',true);
 		btn.html('<i class="fas fa-spinner fa-spin"></i>');
 		$.post(btn.attr('href'), 
 			{csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()},
@@ -119,7 +119,7 @@ $(document).ready(function() {
 					btn.html("Reserved successfully.");
 				}
 				else{
-					btn.attr('disabled',false);
+					btn.prop('disabled',false);
 					btn.html("Reserve");
 					alert(data);
 				}
