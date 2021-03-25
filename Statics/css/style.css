@@ -1,7 +1,12 @@
 html{
     scroll-behavior: smooth;
 }
-
+.search-dropdown-category a {
+    color: #292c47; 
+  }
+.search-dropdown-category a:hover,.search-dropdown-category a:focus {
+    color: #3a3e64; 
+  }
 .pagination{
     justify-content: center;
 }
