@@ -33,12 +33,12 @@
 		#form-title{
 			color: #fff;
 		}
-		.login_btn {
+		.update_btn {
 			width: 100%;
 			background: #33ccff !important;
 			color: white !important;
 		}
-		.login_btn:focus {
+		.update_btn:focus {
 			box-shadow: none !important;
 			outline: 0px !important;
 		}
@@ -105,8 +105,8 @@
                     </div>
                 {% endif %}
 				<div class="mt-4">
-					<div class="d-flex justify-content-center links">
-						Want to change your password? <a href="../password" class="ml-2">Reset Password</a>
+					<div class="text-center links" style="font-size: medium;">
+						Want to change your password?<br><a href="../password" class="ml-2">Change Password</a>
 					</div>
 				</div>
 			</div>
@@ -115,6 +115,9 @@
 
 	<script type="text/javascript">
         var form_fields = document.getElementsByTagName('input');
+		form_fields[1].placeholder='Email';
+        form_fields[2].placeholder='First name';
+        form_fields[3].placeholder='Last name';
 		for (var field in form_fields){	
 			form_fields[field].className += ' form-control'
 		}

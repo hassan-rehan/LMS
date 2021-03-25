@@ -115,11 +115,12 @@ $(document).ready(function() {
 		$.post(btn.attr('href'), 
 			{csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()},
 			function(data){
-				if(data="success"){
+				if(data == "success"){
 					btn.html("Reserved successfully.");
 				}
 				else{
 					btn.attr('disabled',false);
+					btn.html("Reserve");
 					alert(data);
 				}
 			}
