@@ -5,8 +5,13 @@
         <div class="row no-gutter">
             {% for book in books %}
             <div class="col-lg-3 col-md-6 col-sm-6 work">
-                <a href="{{ book.cover_pic.url }}" class="work-box">
-                    <img class="landing-rbs-img" src="{{ book.cover_pic.url }}" alt="img">
+                {% if book.cover_pic.image %}
+                    <a href="{{ book.cover_pic.url }}" class="work-box">
+                        <img class="landing-rbs-img" src="{{ book.cover_pic.url }}" alt="img">
+                {% else %}
+                    <a href="{{ book.cover_pic }}" class="work-box">
+                        <img class="landing-rbs-img" src="{{ book.cover_pic }}" alt="img">
+                {% endif %}
                     <div class="overlay">
                         <div class="overlay-caption">
                             <h5>{{ book.title }}</h5>

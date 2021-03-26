@@ -7,8 +7,11 @@ html{
 .search-dropdown-category a:hover,.search-dropdown-category a:focus {
     color: #3a3e64; 
   }
-.pagination{
-    justify-content: center;
+.page-item.active.page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
 }
 .search-dropdown-category:first-letter{
     text-transform: capitalize;

@@ -8,7 +8,11 @@
                 <h1 class="section-heading">{{ book_data.title }}<br><small style="font-size: 25px;">By: {{ book_data.author }}</small></h1>
                 <div class="row">
                     <div class="col-md-5 img-sec">
-                        <img src="{{ book_data.cover_pic.url }}">
+                        {% if book.cover_pic.image %}
+                            <img src="{{ book_data.cover_pic.url }}" alt="img">
+                        {% else %}
+                            <img src="{{ book_data.cover_pic }}" alt="img">
+                        {% endif %}
                     </div>
                     <div class="col-md-7 book-content">
                         <p>{{ book_data.description }}</p>

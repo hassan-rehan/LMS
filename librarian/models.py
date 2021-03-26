@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import os
 from uuid import uuid4
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 def path_and_rename(instance, filename):
     upload_to = 'books/cover'
@@ -36,9 +37,10 @@ class book(models.Model):
     title = models.CharField(max_length=100)
     category_id = models.ForeignKey(book_category,db_column="category_id", on_delete=models.CASCADE)
     reservation_id = models.ForeignKey(reservation,db_column="reservation_id",null=True,blank=True,on_delete=models.SET_NULL)
-    shelf_no = models.IntegerField()
-    asin_no = models.CharField(max_length=100)
+    shelf_no = models.IntegerField(null=True,blank=True)
+    asin_no = models.CharField(max_length=100,null=True,blank=True)
     author = models.CharField(max_length=100)
     clicks = models.IntegerField(null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    rating = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(5)])
