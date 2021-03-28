@@ -3,14 +3,14 @@
 {% block content %}
 {% csrf_token %}
 <div class="container text-center mb-5">
-    {% include "shared/searchbar.html" with items=categories key=filtered_books.filter %}
+    {% include "shared/searchbar.html" with items=categories key=filtered_books.filter filter_type=filtered_books.filter_type %}
     {% if filtered_books.books %}
         <section class="books-sec" id="recommended-book-section">
             <h1 class="section-heading">Search Results</h1>
             <div class="row">
                 {% include 'shared/books.html' with books=filtered_books.books %}
             </div>
-            {% include 'shared/filter_pagi_links.html' with books=filtered_books.books key=filtered_books.filter %}
+            {% include 'shared/filter_pagi_links.html' with books=filtered_books.books key=filtered_books.filter filter_type=filtered_books.filter_type %}
         </section>
     {% elif filtered_books.filter %}
         <section class="books-sec" id="filter-book-section">

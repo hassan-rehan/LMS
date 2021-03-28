@@ -138,8 +138,20 @@ $(document).ready(function() {
 	if($('#search').length){
 		$('#search').on('keyup', function(evt){
 			if(evt.keyCode === 13){
-				window.location.replace(window.location.href.split("?")[0]+'?filter='+$('#search').val());
+				if($('#search_param').val() != "")
+					window.location.replace(window.location.href.split("?")[0]+'?filter='+$('#search').val()+'&filter_type='+$('#search_param').val());
+				else
+					window.location.replace(window.location.href.split("?")[0]+'?filter='+$('#search').val());
 			} 
 		}); 
+		$("#searchbar-btn").click(function(){
+			if($('#search_param').val() != "")
+				window.location.replace(window.location.href.split("?")[0]+'?filter='+$('#search').val()+'&filter_type='+$('#search_param').val());
+			else
+				window.location.replace(window.location.href.split("?")[0]+'?filter='+$('#search').val());
+		});
+	}
+	if($('#search-category-'+$('#search_param').val()).length){
+		$('#search-category-'+$('#search_param').val()).click();
 	}
 });

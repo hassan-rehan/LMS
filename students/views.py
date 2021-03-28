@@ -11,12 +11,26 @@ def librarypage(request,id):
     if request.user.is_authenticated and request.user.id == id:
         #fetching categories
         categories = book_category.objects.all()
-
         #searching
         keyword = request.GET.get("filter",None)
+        if keyword == "":
+            keyword = None
+        filter_type = request.GET.get("filter_type",None)
+        try:
+            if filter_type == "" or filter_type == "None" or not book_category.objects.filter(id=int(filter_type)).exists():
+                filter_type = None
+        except:
+            filter_type = None
+
         filter_page = []
-        if keyword is not None:
-            filter_books = book.objects.filter(title__icontains=keyword).order_by('-clicks')
+        if keyword or filter_type:
+            filter_books = []
+            if keyword and filter_type:
+                filter_books=book.objects.filter(category_id = book_category.objects.get(id=int(filter_type))).filter(title__icontains=keyword).order_by('-clicks')
+            elif keyword:
+                filter_books = book.objects.filter(title__icontains=keyword).order_by('-clicks')
+            else:
+                filter_books=book.objects.filter(category_id = book_category.objects.get(id=int(filter_type))).order_by('-clicks')
             filter_page_num = request.GET.get("filter_page",1)
             fp = Paginator(filter_books,20)
             #handling page number OutOfBound
@@ -40,7 +54,7 @@ def librarypage(request,id):
         if latest_visited_book.objects.filter(user=request.user).exists():
             lvb=latest_visited_book.objects.get(user=request.user)
             recommend_ids=model.desc_recommend(lvb.firstbook.id,lvb.firstbook.category_id.id)
-            recommended_books = book.objects.filter(id__in=recommend_ids).order_by('-clicks')
+            recommended_books = book.objects.filter(id__in=recommend_ids)#.order_by('-clicks')
             recommended_page_num = request.GET.get("recommended_page",1)
             rp = Paginator(recommended_books,20) #20 products per page
             try:
@@ -48,7 +62,7 @@ def librarypage(request,id):
             except:
                 recommended_page = rp.page(1)
         
-        return render(request, 'librarypage.html',{'latest_books' : latest_page, 'recommended_books' : recommended_page, 'filtered_books' : {'books': filter_page,'filter' : keyword}, 'categories' : categories})
+        return render(request, 'librarypage.html',{'latest_books' : latest_page, 'recommended_books' : recommended_page, 'filtered_books' : {'books': filter_page,'filter' : keyword, 'filter_type' : filter_type}, 'categories' : categories})
     else:
         return redirect("/")
 
