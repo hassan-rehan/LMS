@@ -138,7 +138,7 @@ $(document).ready(function() {
 	if($('#search').length){
 		$('#search').on('keyup', function(evt){
 			if(evt.keyCode === 13){
-				window.location.href = window.location.href+'?filter='+$('#search').val();
+				window.location.replace(window.location.href.split("?")[0]+'?filter='+$('#search').val());
 			} 
 		}); 
 	}
