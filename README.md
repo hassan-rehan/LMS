@@ -14,3 +14,11 @@ Implementation:
 2. The system has two main elements:
     a. knowledge base ( information used by human librarian experts to make decision) the knowledge base rule is formed of (If) phase for condition and (Then) phase for result
     b. Inference engine (simulation of human decision making)
+
+commands:
+    pip install pandas
+    pip install regex
+    pip install sklearn
+    pip install nltk
+    pip intall tables (if command give error, try to install this package from whl file)
+    python -m nltk.downloader stopwords

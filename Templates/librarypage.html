@@ -3,7 +3,25 @@
 {% block content %}
 {% csrf_token %}
 <div class="container text-center mb-5">
-    {% include "shared/searchbar.html" with items=categories %}
+    {% include "shared/searchbar.html" with items=categories key=filtered_books.filter %}
+    {% if filtered_books.books %}
+        <section class="books-sec" id="recommended-book-section">
+            <h1 class="section-heading">Search Results</h1>
+            <div class="row">
+                {% include 'shared/books.html' with books=filtered_books.books %}
+            </div>
+            {% include 'shared/filter_pagi_links.html' with books=filtered_books.books key=filtered_books.filter %}
+        </section>
+    {% elif filtered_books.filter %}
+        <section class="books-sec" id="filter-book-section">
+            <h1 class="section-heading">Search Results</h1>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12" style="text-align: center;">
+                    <h4>No result found.</h4>
+                </div>
+            </div>
+        </section>
+    {% endif %}
     <section class="books-sec" id="new-book-section">
         <h1 class="section-heading">New books</h1>
         <div class="row">
@@ -11,12 +29,14 @@
         </div>
         {% include 'shared/pagi_links.html' with books=latest_books page_type="latest_page" %}
     </section>
-    <section class="books-sec" id="recommended-book-section">
-        <h1 class="section-heading">Recommended books</h1>
-        <div class="row">
-            {% include 'shared/books.html' with books=recommended_books %}
-        </div>
-        {% include 'shared/pagi_links.html' with books=recommended_books page_type="recommended_page" %}
-    </section>
+    {% if recommended_books %}
+        <section class="books-sec" id="recommended-book-section">
+            <h1 class="section-heading">Recommended books</h1>
+            <div class="row">
+                {% include 'shared/books.html' with books=recommended_books %}
+            </div>
+            {% include 'shared/pagi_links.html' with books=recommended_books page_type="recommended_page" %}
+        </section>
+    {% endif %}
 </div>
 {% endblock %}

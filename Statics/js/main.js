@@ -127,18 +127,18 @@ $(document).ready(function() {
 		);
 	});
 
-	$('.search-panel .dropdown-menu').find('a').click(function(e) {
+	$('.search-panel .dropdown-menu .search-dropdown-category').click(function(e) {
 		e.preventDefault();
-		var param = $(this).attr("href").replace("#","");
-		var concept = $(this).text();
-		$('.search-panel label#search_concept').text(concept);
+		var param = $(this).find('a').data("id");
+		var concept = $(this).find('a').text();
+		$('.search-panel #search_concept').text(concept);
 		$('.input-group #search_param').val(param);
 	});
 	
 	if($('#search').length){
 		$('#search').on('keyup', function(evt){
 			if(evt.keyCode === 13){
-				alert('You pressed enter');
+				window.location.href = window.location.href+'?filter='+$('#search').val();
 			} 
 		}); 
 	}

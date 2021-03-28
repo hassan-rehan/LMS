@@ -8,12 +8,16 @@
                     </button>
                     <ul class="dropdown-menu scrollable-dropdown" role="menu">
                         {% for item in items %}
-                            <li class="search-dropdown-category"><a id="category-{{ item.id }}" href="#">{{ item.category }}</a></li>
+                            <li class="search-dropdown-category"><a data-id="{{ item.id }}" href="#">{{ item.category }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
                 <input type="hidden" name="search_param" value="all" id="search_param">
-                <input type="text" class="form-control" name="x" id="search" placeholder="Search">
+                {% if key %}
+                    <input type="text" class="form-control" name="x" id="search" placeholder="Search by title" value="{{ key }}">
+                {% else %}
+                    <input type="text" class="form-control" name="x" id="search" placeholder="Search by title">
+                {% endif %}
                 <span class="input-group-append">
                     <button class="btn btn-default" type="button">
                         <i class="fas fa-search"></i>

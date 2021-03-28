@@ -13,7 +13,7 @@ html{
     background-color: #007bff;
     border-color: #007bff;
 }
-.search-dropdown-category:first-letter{
+.search-dropdown-category, #search_concept{
     text-transform: capitalize;
 }
 #messages{

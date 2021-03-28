@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 import os
 from uuid import uuid4
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth.models import User
 
 def path_and_rename(instance, filename):
     upload_to = 'books/cover'
@@ -43,4 +44,8 @@ class book(models.Model):
     clicks = models.IntegerField(null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    rating = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(5)])
+
+class latest_visited_book(models.Model):
+    user = models.OneToOneField(User, db_column="user", on_delete=models.CASCADE)
+    firstbook = models.ForeignKey(book, db_column="firstbook", null=True, blank=True, related_name="firstbook", on_delete=models.SET_NULL)
+    secondbook = models.ForeignKey(book, db_column="secondbook", null=True, blank=True, related_name="secondbook", on_delete=models.SET_NULL)
