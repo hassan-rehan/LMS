@@ -5,7 +5,7 @@ from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import re, os
-
+import pdb
 
 def _removeNonAscii(s):
     return "".join(i for i in s if  ord(i)<128)
@@ -113,6 +113,13 @@ def title_recommend(idx, category_id):
     return rec.id.tolist()
 
 def add_data(id,title,desc,type):
-    dataframe = pd.DataFrame({'id':[id],'title':[title],'cleaned_desc':[clean_description(desc)]})
+    dataframe = pd.DataFrame({'id':[id],'title':[title],'cleaned_desc':[clean_description(desc)],'category_id':[id]})
     current_path = os.path.dirname(__file__)
     dataframe.to_hdf(os.path.join(current_path,'data.h5'),key='model_data', format='table',append=True)
+
+def delete_data(id):
+    pdb.set_trace()
+    current_path = os.path.dirname(__file__)
+    store = pd.HDFStore(os.path.join(current_path,'data.h5'))
+    a = store.get('model_data')
+    store.remove('model_data', where="index in %s" % a[a['id'] == id].index[0])

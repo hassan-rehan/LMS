@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import os
+from students import model
 from uuid import uuid4
 from django.contrib.auth.models import User
 
@@ -33,7 +34,7 @@ class reservation(models.Model):
     reserved_at = models.DateTimeField(auto_now_add=True)
     reserved_by = models.ForeignKey(User,db_column="reserved_by",on_delete=models.CASCADE)
     def __str__(self):
-        return self.reserved_by.id
+        return str(self.reserved_by.id)
 
 class book(models.Model):
     description = models.TextField()
@@ -44,11 +45,21 @@ class book(models.Model):
     shelf_no = models.IntegerField(null=True,blank=True)
     asin_no = models.CharField(max_length=100,null=True,blank=True)
     author = models.CharField(max_length=100)
+    admin_notes = models.TextField(null=True,blank=True)
     clicks = models.IntegerField(null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.title
+        
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        model.add_data(self.id,self.title,self.description,self.category_id.id)
+    
+    def delete(self):
+        id = self.id
+        super(book, self).delete()
+        model.delete_data(id)
 
 class latest_visited_book(models.Model):
     user = models.OneToOneField(User, db_column="user", on_delete=models.CASCADE)
