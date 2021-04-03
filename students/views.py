@@ -54,7 +54,7 @@ def librarypage(request,id):
         if latest_visited_book.objects.filter(user=request.user).exists():
             lvb=latest_visited_book.objects.get(user=request.user)
             recommend_ids=model.desc_recommend(lvb.firstbook.id,lvb.firstbook.category_id.id)
-            recommended_books = book.objects.filter(id__in=recommend_ids)#.order_by('-clicks')
+            recommended_books = book.objects.filter(id__in=recommend_ids).order_by('-clicks')
             recommended_page_num = request.GET.get("recommended_page",1)
             rp = Paginator(recommended_books,20) #20 products per page
             try:
