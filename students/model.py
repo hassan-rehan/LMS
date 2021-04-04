@@ -44,7 +44,8 @@ def clean_description(desc):
 # Function for recommending books based on Book description.
 def desc_recommend(idx, category_id):
     current_path = os.path.dirname(__file__)
-    dataframe = pd.read_hdf(os.path.join(current_path,'data.h5'), 'model_data')
+    store = pd.HDFStore(os.path.join(current_path,'data.h5'))
+    dataframe = store.get('model_data')
     # Matching the category_id with the dataset and reset the index
     data = dataframe.loc[dataframe['category_id'] == category_id]  
     data.reset_index(level = 0, inplace = True)
@@ -77,9 +78,10 @@ def desc_recommend(idx, category_id):
     return rec.id.tolist()
 
 def title_recommend(idx, category_id):
-    # Matching the category_id with the dataset and reset the index
     current_path = os.path.dirname(__file__)
-    dataframe = pd.read_hdf(os.path.join(current_path,'data.h5'), 'model_data')
+    store = pd.HDFStore(os.path.join(current_path,'data.h5'))
+    dataframe = store.get('model_data')
+    # Matching the category_id with the dataset and reset the index
     data = dataframe.loc[dataframe['category_id'] == category_id]  
     data.reset_index(level = 0, inplace = True) 
 
@@ -112,12 +114,13 @@ def title_recommend(idx, category_id):
     return rec.id.tolist()
 
 def add_data(id,title,desc,cid):
-    dataframe = pd.DataFrame({'id':[id],'title':[title],'cleaned_desc':[clean_description(desc)],'category_id':[cid]})
     current_path = os.path.dirname(__file__)
-    dataframe.to_hdf(os.path.join(current_path,'data.h5'),key='model_data', format='table',append=True)
+    store = pd.HDFStore(os.path.join(current_path,'data.h5'))
+    dataframe = pd.DataFrame({'id': id,'title': title,'cleaned_desc':clean_description(desc),'category_id': cid})
+    store.append('model_data', dataframe, format='table',  data_columns=True)
 
 def delete_data(id):
     current_path = os.path.dirname(__file__)
     store = pd.HDFStore(os.path.join(current_path,'data.h5'))
     a = store.get('model_data')
-    store.remove('model_data', where="index in %s" % a[a['id'] == id].index[0])
+    store.remove('model_data', where="index in %s" % list(a[a['id'] == id].index))
