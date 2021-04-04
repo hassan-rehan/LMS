@@ -59,7 +59,7 @@ def desc_recommend(idx, category_id):
     # Get the pairwsie similarity scores 
     sig = list(enumerate(sg[idx]))
     # Sort the books
-    sig = sorted(sig, key=lambda x: x[1], reverse=True)# Scores of the 5 most similar books 
+    sig = sorted(sig, key=lambda x: x[1], reverse=True)
     
     # Scores of the 1 to 10 most similar books
     if len(data) > 10:
@@ -111,8 +111,8 @@ def title_recommend(idx, category_id):
     # It reads the top 1 to 40 recommended book urls and print the images
     return rec.id.tolist()
 
-def add_data(id,title,desc,type):
-    dataframe = pd.DataFrame({'id':[id],'title':[title],'cleaned_desc':[clean_description(desc)],'category_id':[id]})
+def add_data(id,title,desc,cid):
+    dataframe = pd.DataFrame({'id':[id],'title':[title],'cleaned_desc':[clean_description(desc)],'category_id':[cid]})
     current_path = os.path.dirname(__file__)
     dataframe.to_hdf(os.path.join(current_path,'data.h5'),key='model_data', format='table',append=True)
 
