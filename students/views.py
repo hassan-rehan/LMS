@@ -112,12 +112,17 @@ def book_detail(request,id,bid):
         #updating last visited books
         if  latest_visited_book.objects.filter(user=request.user).exists():
             lbv=latest_visited_book.objects.get(user=request.user)
-            if lbv.book_1.id != b.id:
+            if lbv.book_1.id != b.id and lbv.book_2.id != b.id and lbv.book_3.id != b.id and lbv.book_4.id != b.id and lbv.book_5.id != b.id:
                 lbv.book_5 = lbv.book_4
+                lbv.book_5_click = lbv.book_4_click
                 lbv.book_4 = lbv.book_3
+                lbv.book_4_click = lbv.book_3_click
                 lbv.book_3= lbv.book_2
+                lbv.book_3_click = lbv.book_2_click
                 lbv.book_2 = lbv.book_1
+                lbv.book_2_click = lbv.book_1_click
                 lbv.book_1 = b
+                lbv.book_1_click = 1
 
             #updating user clicks
             if lbv.book_1.id == b.id:
