@@ -1,1 +1,1 @@
-web: gunicorn LMS.wsgi --timeout 15
+web: gunicorn LMS.wsgi --preload --timeout 30
