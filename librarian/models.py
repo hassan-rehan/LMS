@@ -63,7 +63,10 @@ class book(models.Model):
 
 class latest_visited_book(models.Model):
     user = models.OneToOneField(User, db_column="user", on_delete=models.CASCADE)
-    firstbook = models.ForeignKey(book, db_column="firstbook", null=True, blank=True, related_name="firstbook", on_delete=models.SET_NULL)
-    secondbook = models.ForeignKey(book, db_column="secondbook", null=True, blank=True, related_name="secondbook", on_delete=models.SET_NULL)
+    book_1 = models.ForeignKey(book, db_column="book_1", null=True, blank=True, related_name="book_1", on_delete=models.SET_NULL)
+    book_2 = models.ForeignKey(book, db_column="book_2", null=True, blank=True, related_name="book_2", on_delete=models.SET_NULL)
+    book_3 = models.ForeignKey(book, db_column="book_3", null=True, blank=True, related_name="book_3", on_delete=models.SET_NULL)
+    book_4 = models.ForeignKey(book, db_column="book_4", null=True, blank=True, related_name="book_4", on_delete=models.SET_NULL)
+    book_5 = models.ForeignKey(book, db_column="book_5", null=True, blank=True, related_name="book_5", on_delete=models.SET_NULL)
     def __str__(self):
         return self.firstbook.title

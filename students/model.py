@@ -61,9 +61,9 @@ def desc_recommend(idx, category_id):
     # Sort the books
     sig = sorted(sig, key=lambda x: x[1], reverse=True)# Scores of the 5 most similar books 
     
-    # Scores of the 1 to 40 most similar books
-    if len(data) > 40:
-        sig = sig[0:41]
+    # Scores of the 1 to 10 most similar books
+    if len(data) > 10:
+        sig = sig[0:11]
     else:
         sig = sig[0:len(data)]
     
@@ -96,9 +96,9 @@ def title_recommend(idx, category_id):
     # Sort the books
     sig = sorted(sig, key=lambda x: x[1], reverse=True)
     
-    # Scores of the 1 to 40 most similar books
-    if len(data) > 40:
-        sig = sig[0:41]
+    # Scores of the 1 to 10 most similar books
+    if len(data) > 10:
+        sig = sig[0:11]
     else:
         sig = sig[0:len(data)]
     

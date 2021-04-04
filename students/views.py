@@ -53,9 +53,25 @@ def librarypage(request,id):
         recommended_page = []
         if latest_visited_book.objects.filter(user=request.user).exists():
             lvb=latest_visited_book.objects.get(user=request.user)
-            recommend_ids=model.desc_recommend(lvb.firstbook.id,lvb.firstbook.category_id.id)
+            #getting recomendation book IDs of all latest 5 books visited by the user
+            recommend_ids=[]
+            if lvb.book_1:
+                recommend_ids=model.desc_recommend(lvb.book_1.id,lvb.book_1.category_id.id)
+            if lvb.book_2:
+                recommend_ids=recommend_ids+model.desc_recommend(lvb.book_2.id,lvb.book_2.category_id.id)
+            if lvb.book_3:
+                recommend_ids=recommend_ids+model.desc_recommend(lvb.book_3.id,lvb.book_3.category_id.id)
+            if lvb.book_4:
+                recommend_ids=recommend_ids+model.desc_recommend(lvb.book_4.id,lvb.book_4.category_id.id)
+            if lvb.book_5:
+                recommend_ids=recommend_ids+model.desc_recommend(lvb.book_5.id,lvb.book_5.category_id.id)
+            #Removing duplicates
+            recommend_ids=list(dict.fromkeys(recommend_ids))
+            #getting books data
             recommended_books = book.objects.filter(id__in=recommend_ids).order_by('-clicks')
+            #getting page number
             recommended_page_num = request.GET.get("recommended_page",1)
+            #pagination
             rp = Paginator(recommended_books,20) #20 products per page
             try:
                 recommended_page = rp.page(recommended_page_num)
@@ -125,11 +141,14 @@ def update_book_clicks(request,id,bid):
         #updating last visited books
         if  latest_visited_book.objects.filter(user=request.user).exists():
             lbv=latest_visited_book.objects.get(user=request.user)
-            lbv.secondbook = lbv.firstbook
-            lbv.firstbook = b
+            lbv.book_5 = lbv.book_4
+            lbv.book_4 = lbv.book_3
+            lbv.book_3= lbv.book_2
+            lbv.book_2 = lbv.book_1
+            lbv.book_1 = b
             lbv.save()
         else:
-            lbv=latest_visited_book(user=request.user,firstbook=b)
+            lbv=latest_visited_book(user=request.user,book_1=b)
             lbv.save()
     return HttpResponse("success")
 
