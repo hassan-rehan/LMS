@@ -67,7 +67,7 @@ def librarypage(request,id):
                 total_clicks = total_clicks+lvb.book_5_click
 
             if lvb.book_1:
-                ratio = int((lvb.book_1_click/total_clicks)*50)
+                ratio = int((lvb.book_1_click / total_clicks)*50)
                 recommend_ids=model.desc_recommend(lvb.book_1.id,lvb.book_1.category_id.id,ratio)
             if lvb.book_2:
                 ratio = int((lvb.book_2_click / total_clicks)*50)
@@ -121,27 +121,27 @@ def book_detail(request,id,bid):
 
             #updating user clicks
             if lbv.book_1.id == b.id:
-                if b.book_1_click is None:
+                if lbv.book_1_click is None:
                     lbv.book_1_click = 1
                 else:
                     lbv.book_1_click = lbv.book_1_click + 1
             elif lbv.book_2.id == b.id:
-                if b.book_2_click is None:
+                if lbv.book_2_click is None:
                     lbv.book_2_click = 1
                 else:
                     lbv.book_2_click = lbv.book_2_click + 1
             elif lbv.book_3.id == b.id:
-                if b.book_3_click is None:
+                if lbv.book_3_click is None:
                     lbv.book_3_click = 1
                 else:
                     lbv.book_3_click = lbv.book_3_click + 1
             elif lbv.book_4.id == b.id:
-                if b.book_4_click is None:
+                if lbv.book_4_click is None:
                     lbv.book_4_click = 1
                 else:
                     lbv.book_4_click = lbv.book_4_click + 1
             elif lbv.book_5.id == b.id:
-                if b.book_5_click is None:
+                if lbv.book_5_click is None:
                     lbv.book_5_click = 1
                 else:
                     lbv.book_5_click = lbv.book_5_click + 1
