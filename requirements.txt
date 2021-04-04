@@ -21,7 +21,7 @@ scipy==1.6.2
 six==1.15.0
 sklearn==0.0
 sqlparse==0.4.1
-tables @ file:///C:/Users/muham/OneDrive/Desktop/tables-3.6.1-cp39-cp39-win_amd64.whl
+tables==3.6.1
 threadpoolctl==2.1.0
 toml==0.10.2
 tqdm==4.59.0
