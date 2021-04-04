@@ -68,5 +68,10 @@ class latest_visited_book(models.Model):
     book_3 = models.ForeignKey(book, db_column="book_3", null=True, blank=True, related_name="book_3", on_delete=models.SET_NULL)
     book_4 = models.ForeignKey(book, db_column="book_4", null=True, blank=True, related_name="book_4", on_delete=models.SET_NULL)
     book_5 = models.ForeignKey(book, db_column="book_5", null=True, blank=True, related_name="book_5", on_delete=models.SET_NULL)
+    book_1_click = models.IntegerField(null=True,blank=True)
+    book_2_click = models.IntegerField(null=True,blank=True)
+    book_3_click = models.IntegerField(null=True,blank=True)
+    book_4_click = models.IntegerField(null=True,blank=True)
+    book_5_click = models.IntegerField(null=True,blank=True)
     def __str__(self):
         return self.firstbook.title

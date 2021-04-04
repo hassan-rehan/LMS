@@ -42,7 +42,7 @@ def clean_description(desc):
     return desc
 
 # Function for recommending books based on Book description.
-def desc_recommend(bid, category_id):
+def desc_recommend(bid, category_id, ratio):
     current_path = os.path.dirname(__file__)
     store = pd.HDFStore(os.path.join(current_path,'data.h5'))
     dataframe = store.get('model_data')
@@ -80,7 +80,7 @@ def desc_recommend(bid, category_id):
     # It reads the top 1 to 40 recommend book url and print the images
     return rec.id.tolist()
 
-def title_recommend(bid, category_id):
+def title_recommend(bid, category_id, ratio):
     current_path = os.path.dirname(__file__)
     store = pd.HDFStore(os.path.join(current_path,'data.h5'))
     dataframe = store.get('model_data')
@@ -105,8 +105,8 @@ def title_recommend(bid, category_id):
     sig = sorted(sig, key=lambda x: x[1], reverse=True)
     
     # Scores of the 1 to 10 most similar books
-    if len(data) > 10:
-        sig = sig[0:11]
+    if len(data) > ratio:
+        sig = sig[0:,ratio+1]
     else:
         sig = sig[0:len(data)]
     

@@ -55,16 +55,32 @@ def librarypage(request,id):
             lvb=latest_visited_book.objects.get(user=request.user)
             #getting recomendation book IDs of all latest 5 books visited by the user
             recommend_ids=[]
+            #calculating total clicks
+            total_clicks = lvb.book_1_click
+            if lvb.book_2_click:
+                total_clicks = total_clicks+lvb.book_2_click
+            if lvb.book_3_click:
+                total_clicks = total_clicks+lvb.book_3_click
+            if lvb.book_4_click:
+                total_clicks = total_clicks+lvb.book_4_click
+            if lvb.book_5_click:
+                total_clicks = total_clicks+lvb.book_5_click
+
             if lvb.book_1:
-                recommend_ids=model.desc_recommend(lvb.book_1.id,lvb.book_1.category_id.id)
+                ratio = int((lvb.book_1_click/total_clicks)*50)
+                recommend_ids=model.desc_recommend(lvb.book_1.id,lvb.book_1.category_id.id,ratio)
             if lvb.book_2:
-                recommend_ids=recommend_ids+model.desc_recommend(lvb.book_2.id,lvb.book_2.category_id.id)
+                ratio = int((lvb.book_2_click / total_clicks)*50)
+                recommend_ids=recommend_ids+model.desc_recommend(lvb.book_2.id,lvb.book_2.category_id.id,ratio)
             if lvb.book_3:
-                recommend_ids=recommend_ids+model.desc_recommend(lvb.book_3.id,lvb.book_3.category_id.id)
+                ratio = int((lvb.book_3_click / total_clicks)*50)
+                recommend_ids=recommend_ids+model.desc_recommend(lvb.book_3.id,lvb.book_3.category_id.id,ratio)
             if lvb.book_4:
-                recommend_ids=recommend_ids+model.desc_recommend(lvb.book_4.id,lvb.book_4.category_id.id)
+                ratio = int((lvb.book_4_click / total_clicks)*50)
+                recommend_ids=recommend_ids+model.desc_recommend(lvb.book_4.id,lvb.book_4.category_id.id,ratio)
             if lvb.book_5:
-                recommend_ids=recommend_ids+model.desc_recommend(lvb.book_5.id,lvb.book_5.category_id.id)
+                ratio = int((lvb.book_5_click / total_clicks)*50)
+                recommend_ids=recommend_ids+model.desc_recommend(lvb.book_5.id,lvb.book_5.category_id.id,ratio)
             #Removing duplicates
             recommend_ids=list(dict.fromkeys(recommend_ids))
             #getting books data
@@ -91,18 +107,48 @@ def book_detail(request,id,bid):
             f.update(clicks=1)
         else:
             f.update(clicks=b.clicks+1)
+        
 
         #updating last visited books
         if  latest_visited_book.objects.filter(user=request.user).exists():
             lbv=latest_visited_book.objects.get(user=request.user)
-            lbv.book_5 = lbv.book_4
-            lbv.book_4 = lbv.book_3
-            lbv.book_3= lbv.book_2
-            lbv.book_2 = lbv.book_1
-            lbv.book_1 = b
+            if lbv.book_1.id != b.id:
+                lbv.book_5 = lbv.book_4
+                lbv.book_4 = lbv.book_3
+                lbv.book_3= lbv.book_2
+                lbv.book_2 = lbv.book_1
+                lbv.book_1 = b
+
+            #updating user clicks
+            if lbv.book_1.id == b.id:
+                if b.book_1_click is None:
+                    lbv.book_1_click = 1
+                else:
+                    lbv.book_1_click = lbv.book_1_click + 1
+            elif lbv.book_2.id == b.id:
+                if b.book_2_click is None:
+                    lbv.book_2_click = 1
+                else:
+                    lbv.book_2_click = lbv.book_2_click + 1
+            elif lbv.book_3.id == b.id:
+                if b.book_3_click is None:
+                    lbv.book_3_click = 1
+                else:
+                    lbv.book_3_click = lbv.book_3_click + 1
+            elif lbv.book_4.id == b.id:
+                if b.book_4_click is None:
+                    lbv.book_4_click = 1
+                else:
+                    lbv.book_4_click = lbv.book_4_click + 1
+            elif lbv.book_5.id == b.id:
+                if b.book_5_click is None:
+                    lbv.book_5_click = 1
+                else:
+                    lbv.book_5_click = lbv.book_5_click + 1
+
             lbv.save()
         else:
-            lbv=latest_visited_book(user=request.user,book_1=b)
+            lbv=latest_visited_book(user=request.user,book_1=b,book_1_click=1)
             lbv.save()
         return render(request, 'book_detail.html',{'book_data' : b})
     else:
