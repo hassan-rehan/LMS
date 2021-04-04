@@ -116,7 +116,7 @@ def title_recommend(idx, category_id):
 def add_data(id,title,desc,cid):
     current_path = os.path.dirname(__file__)
     store = pd.HDFStore(os.path.join(current_path,'data.h5'))
-    dataframe = pd.DataFrame({'id': id,'title': title,'cleaned_desc':clean_description(desc),'category_id': cid})
+    dataframe = pd.DataFrame({'id': id,'title': title,'cleaned_desc':clean_description(desc),'category_id': cid}, index=[store.get('model_data').index[-1]+1])
     store.append('model_data', dataframe, format='table',  data_columns=True)
 
 def delete_data(id):

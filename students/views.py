@@ -84,8 +84,27 @@ def librarypage(request,id):
 
 def book_detail(request,id,bid):
     if request.user.is_authenticated and request.user.id == id:
-        book_data = book.objects.get(id=bid)
-        return render(request, 'book_detail.html',{'book_data' : book_data})
+        #updating clicks
+        b = book.objects.get(id=bid)
+        f = book.objects.filter(id=bid)
+        if b.clicks is None:
+            f.update(clicks=1)
+        else:
+            f.update(clicks=b.clicks+1)
+
+        #updating last visited books
+        if  latest_visited_book.objects.filter(user=request.user).exists():
+            lbv=latest_visited_book.objects.get(user=request.user)
+            lbv.book_5 = lbv.book_4
+            lbv.book_4 = lbv.book_3
+            lbv.book_3= lbv.book_2
+            lbv.book_2 = lbv.book_1
+            lbv.book_1 = b
+            lbv.save()
+        else:
+            lbv=latest_visited_book(user=request.user,book_1=b)
+            lbv.save()
+        return render(request, 'book_detail.html',{'book_data' : b})
     else:
         return redirect("/")
 
@@ -127,30 +146,6 @@ def my_reservations(request,id):
         return render(request,'my_reservation.html',{'reserved_books' : reserved_books})
     else:
         return redirect('/')
-
-def update_book_clicks(request,id,bid):
-    if request.user.is_authenticated and request.user.id == id and request.method == 'POST':
-        #updating clicks
-        b = book.objects.get(id=bid)
-        if b.clicks is None:
-            b.clicks=1
-        else:
-            b.clicks=b.clicks+1
-        b.save()
-
-        #updating last visited books
-        if  latest_visited_book.objects.filter(user=request.user).exists():
-            lbv=latest_visited_book.objects.get(user=request.user)
-            lbv.book_5 = lbv.book_4
-            lbv.book_4 = lbv.book_3
-            lbv.book_3= lbv.book_2
-            lbv.book_2 = lbv.book_1
-            lbv.book_1 = b
-            lbv.save()
-        else:
-            lbv=latest_visited_book(user=request.user,book_1=b)
-            lbv.save()
-    return HttpResponse("success")
 
 def reserve_book(request,id,bid):
     if request.user.is_authenticated and request.user.id == id and request.method == 'POST':

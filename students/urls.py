@@ -8,5 +8,4 @@ urlpatterns= [
     path('edit/',views.edit_user,name='edit_user'),
     path('password/',views.change_user_password,name='change_user_password'),
     path('library/book/<int:bid>/',views.book_detail,name='book_detail_page'),
-    path('library/book/<int:bid>/update-clicks',views.update_book_clicks,name='update_book_clicks'),
 ]
