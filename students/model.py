@@ -42,13 +42,15 @@ def clean_description(desc):
     return desc
 
 # Function for recommending books based on Book description.
-def desc_recommend(idx, category_id):
+def desc_recommend(bid, category_id):
     current_path = os.path.dirname(__file__)
     store = pd.HDFStore(os.path.join(current_path,'data.h5'))
     dataframe = store.get('model_data')
     # Matching the category_id with the dataset and reset the index
     data = dataframe.loc[dataframe['category_id'] == category_id]  
     data.reset_index(level = 0, inplace = True)
+    # Convert the index into series
+    indices = pd.Series(data.index, index = data['id'])
     
     #Converting the book description into vectors and used bigram
     tf = TfidfVectorizer(analyzer='word', ngram_range=(2, 2), min_df = 1, stop_words='english')
@@ -56,7 +58,8 @@ def desc_recommend(idx, category_id):
     
     # Calculating the similarity measures based on Cosine Similarity
     sg = cosine_similarity(tfidf_matrix, tfidf_matrix)
-
+    # Get the index corresponding to original id  
+    idx = indices[bid]
     # Get the pairwsie similarity scores 
     sig = list(enumerate(sg[idx]))
     # Sort the books
@@ -77,13 +80,15 @@ def desc_recommend(idx, category_id):
     # It reads the top 1 to 40 recommend book url and print the images
     return rec.id.tolist()
 
-def title_recommend(idx, category_id):
+def title_recommend(bid, category_id):
     current_path = os.path.dirname(__file__)
     store = pd.HDFStore(os.path.join(current_path,'data.h5'))
     dataframe = store.get('model_data')
     # Matching the category_id with the dataset and reset the index
     data = dataframe.loc[dataframe['category_id'] == category_id]  
     data.reset_index(level = 0, inplace = True) 
+     # Convert the index into series
+    indices = pd.Series(data.index, index = data['id'])
 
     #Converting the book title into vectors and used bigram
     tf = TfidfVectorizer(analyzer='word', ngram_range=(2, 2), min_df = 1, stop_words='english')
@@ -91,7 +96,8 @@ def title_recommend(idx, category_id):
 
     # Calculating the similarity measures based on Cosine Similarity
     sg = cosine_similarity(tfidf_matrix, tfidf_matrix)
-
+    # Get the index corresponding to original id
+    idx = indices[bid]
     # Get the pairwsie similarity scores by giving ID
     sig = list(enumerate(sg[idx]))
     
