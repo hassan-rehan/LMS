@@ -26,7 +26,7 @@ SECRET_KEY = '&3%rf4qcbcn2je%drtqf!xf@jr$o^dm42twc51l7pzkb_f%v7a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://infinite-mesa-52548.herokuapp.com/','127.0.0.1']
 
 
 # Application definition
