@@ -92,20 +92,7 @@ $(document).ready(function() {
 			$('html, body').animate({ scrollTop: $(window.location.hash).offset().top - 75 });
 		}, 1500);
 	}
-
-	//Updating book clicks
-	$(".store-book-link").click(function(){
-		$.post($(this).attr('href')+'/update-clicks', 
-			{csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()},
-			function(data){
-				if(data="success")
-					console.log("Clicks updated successfully.");
-				else
-					console.log("Clicks not updated successfully.");
-			}
-		);
-	});
-
+	
 	//book reservation
 	$("#reserve-button").click(function(e){
 		e.preventDefault();

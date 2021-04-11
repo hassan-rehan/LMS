@@ -108,50 +108,61 @@ def book_detail(request,id,bid):
         else:
             f.update(clicks=b.clicks+1)
         
-
-        #updating last visited books
         if  latest_visited_book.objects.filter(user=request.user).exists():
             lbv=latest_visited_book.objects.get(user=request.user)
-            if lbv.book_1.id != b.id and lbv.book_2.id != b.id and lbv.book_3.id != b.id and lbv.book_4.id != b.id and lbv.book_5.id != b.id:
-                lbv.book_5 = lbv.book_4
-                lbv.book_5_click = lbv.book_4_click
-                lbv.book_4 = lbv.book_3
-                lbv.book_4_click = lbv.book_3_click
-                lbv.book_3= lbv.book_2
-                lbv.book_3_click = lbv.book_2_click
-                lbv.book_2 = lbv.book_1
-                lbv.book_2_click = lbv.book_1_click
-                lbv.book_1 = b
-                lbv.book_1_click = 1
-
             #updating user clicks
-            if lbv.book_1.id == b.id:
-                if lbv.book_1_click is None:
+            try:
+                if lbv.book_1.id == b.id:
+                    if lbv.book_1_click is None:
+                        lbv.book_1_click = 1
+                    else:
+                        lbv.book_1_click = lbv.book_1_click + 1
+                elif lbv.book_2.id == b.id:
+                    if lbv.book_2_click is None:
+                        lbv.book_2_click = 1
+                    else:
+                        lbv.book_2_click = lbv.book_2_click + 1
+                elif lbv.book_3.id == b.id:
+                    if lbv.book_3_click is None:
+                        lbv.book_3_click = 1
+                    else:
+                        lbv.book_3_click = lbv.book_3_click + 1
+                elif lbv.book_4.id == b.id:
+                    if lbv.book_4_click is None:
+                        lbv.book_4_click = 1
+                    else:
+                        lbv.book_4_click = lbv.book_4_click + 1
+                elif lbv.book_5.id == b.id:
+                    if lbv.book_5_click is None:
+                        lbv.book_5_click = 1
+                    else:
+                        lbv.book_5_click = lbv.book_5_click + 1
+                else:
+                    #updating last visited books
+                    lbv.book_5 = lbv.book_4
+                    lbv.book_5_click = lbv.book_4_click
+                    lbv.book_4 = lbv.book_3
+                    lbv.book_4_click = lbv.book_3_click
+                    lbv.book_3= lbv.book_2
+                    lbv.book_3_click = lbv.book_2_click
+                    lbv.book_2 = lbv.book_1
+                    lbv.book_2_click = lbv.book_1_click
+                    lbv.book_1 = b
                     lbv.book_1_click = 1
-                else:
-                    lbv.book_1_click = lbv.book_1_click + 1
-            elif lbv.book_2.id == b.id:
-                if lbv.book_2_click is None:
-                    lbv.book_2_click = 1
-                else:
-                    lbv.book_2_click = lbv.book_2_click + 1
-            elif lbv.book_3.id == b.id:
-                if lbv.book_3_click is None:
-                    lbv.book_3_click = 1
-                else:
-                    lbv.book_3_click = lbv.book_3_click + 1
-            elif lbv.book_4.id == b.id:
-                if lbv.book_4_click is None:
-                    lbv.book_4_click = 1
-                else:
-                    lbv.book_4_click = lbv.book_4_click + 1
-            elif lbv.book_5.id == b.id:
-                if lbv.book_5_click is None:
-                    lbv.book_5_click = 1
-                else:
-                    lbv.book_5_click = lbv.book_5_click + 1
-
-            lbv.save()
+            except:
+                    #updating last visited books
+                    lbv.book_5 = lbv.book_4
+                    lbv.book_5_click = lbv.book_4_click
+                    lbv.book_4 = lbv.book_3
+                    lbv.book_4_click = lbv.book_3_click
+                    lbv.book_3= lbv.book_2
+                    lbv.book_3_click = lbv.book_2_click
+                    lbv.book_2 = lbv.book_1
+                    lbv.book_2_click = lbv.book_1_click
+                    lbv.book_1 = b
+                    lbv.book_1_click = 1
+            finally:
+                lbv.save()
         else:
             lbv=latest_visited_book(user=request.user,book_1=b,book_1_click=1)
             lbv.save()
