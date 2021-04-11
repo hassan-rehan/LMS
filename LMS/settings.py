@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'registration',
     'students',
     'librarian',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,8 @@ STATICFILES_DIRS=[
 ]
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'Media')
+
+GRAPH_MODELS ={
+    'all_applications': True,
+    'group_models': True,
+}
