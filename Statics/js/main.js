@@ -99,7 +99,7 @@ $(document).ready(function() {
 		var btn = $(this);
 		btn.prop('disabled',true);
 		btn.html('<i class="fas fa-spinner fa-spin"></i>');
-		$.post(btn.attr('href'), 
+		$.post(btn.data('href'), 
 			{csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()},
 			function(data){
 				if(data == "success"){

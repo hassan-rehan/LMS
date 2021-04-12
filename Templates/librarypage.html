@@ -22,13 +22,6 @@
             </div>
         </section>
     {% endif %}
-    <section class="books-sec" id="new-book-section">
-        <h1 class="section-heading">New books</h1>
-        <div class="row">
-            {% include 'shared/books.html' with books=latest_books %}
-        </div>
-        {% include 'shared/pagi_links.html' with books=latest_books page_type="latest_page" %}
-    </section>
     {% if recommended_books %}
         <section class="books-sec" id="recommended-book-section">
             <h1 class="section-heading">Recommended books</h1>
@@ -38,5 +31,12 @@
             {% include 'shared/pagi_links.html' with books=recommended_books page_type="recommended_page" %}
         </section>
     {% endif %}
+    <section class="books-sec" id="new-book-section">
+        <h1 class="section-heading">New books</h1>
+        <div class="row">
+            {% include 'shared/books.html' with books=latest_books %}
+        </div>
+        {% include 'shared/pagi_links.html' with books=latest_books page_type="latest_page" %}
+    </section>
 </div>
 {% endblock %}

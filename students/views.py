@@ -82,7 +82,7 @@ def librarypage(request,id):
                 ratio = int((lvb.book_5_click / total_clicks)*50)
                 recommend_ids=recommend_ids+model.desc_recommend(lvb.book_5.id,lvb.book_5.category_id.id,ratio)
             #Removing duplicates
-            recommend_ids=list(dict.fromkeys(recommend_ids))
+            #recommend_ids=list(dict.fromkeys(recommend_ids))
             #getting books data
             recommended_books = book.objects.filter(id__in=recommend_ids).order_by('-clicks')
             #getting page number

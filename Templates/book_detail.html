@@ -5,7 +5,7 @@
     <div class="container text-center mb-5"> 
         <section class="book-desc-sec">
             {% if book_data %}
-                <h1 class="section-heading">{{ book_data.title }}<br><small style="font-size: 25px;">By: {{ book_data.author }}</small></h1>
+                <h1 class="section-heading"><small style="font-size: 25px;">Row : {{ book_data.shelf_no }}</small><br>{{ book_data.title }}<br><small style="font-size: 25px;">By: {{ book_data.author }}</small></h1>
                 <div class="row">
                     <div class="col-md-5 img-sec">
                         {% if book.cover_pic.image %}
@@ -27,7 +27,7 @@
                         </ul>
                         {% if not book_data.reservation_id %}
                             <div class="btn-sec">
-                                <a class="btn" href="{% url 'reserve_book' id=user.id bid=book_data.id %}" id="reserve-button">Reserve</a>
+                                <button class="btn" data-href="{% url 'reserve_book' id=user.id bid=book_data.id %}" id="reserve-button">Reserve</button>
                             </div>
                         {% endif %}
                     </div>
