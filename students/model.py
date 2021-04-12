@@ -64,10 +64,10 @@ def desc_recommend(bid, category_id, ratio):
     sig = list(enumerate(sg[idx]))
     # Sort the books
     sig = sorted(sig, key=lambda x: x[1], reverse=True)
-    
-    # Scores of the 1 to 10 most similar books
-    if len(data) > 10:
-        sig = sig[0:11]
+
+    # Scores of the most similar books
+    if len(data) > ratio:
+        sig = sig[0:ratio+1]
     else:
         sig = sig[0:len(data)]
     
@@ -76,8 +76,6 @@ def desc_recommend(bid, category_id, ratio):
    
     # Top books recommendation
     rec = data[['id']].iloc[book_indices]
-    
-    # It reads the top 1 to 40 recommend book url and print the images
     return rec.id.tolist()
 
 def title_recommend(bid, category_id, ratio):
@@ -104,9 +102,9 @@ def title_recommend(bid, category_id, ratio):
     # Sort the books
     sig = sorted(sig, key=lambda x: x[1], reverse=True)
     
-    # Scores of the 1 to 10 most similar books
+    # Scores of the most similar books
     if len(data) > ratio:
-        sig = sig[0:,ratio+1]
+        sig = sig[0:ratio+1]
     else:
         sig = sig[0:len(data)]
     
@@ -115,8 +113,6 @@ def title_recommend(bid, category_id, ratio):
 
     # Top books recommendation
     rec = data[['id']].iloc[book_indices]
-        
-    # It reads the top 1 to 40 recommended book urls and print the images
     return rec.id.tolist()
 
 def add_data(id,title,desc,cid):
