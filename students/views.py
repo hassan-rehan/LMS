@@ -217,8 +217,8 @@ def reserve_book(request,id,bid):
             if mpr <= 3: #Book reservation limit per user
                 reserve = reservation(reserved_by=request.user)
                 reserve.save()
-                b.reservation_id = reserve
-                b.save()
+                b = book.objects.filter(id=bid)
+                b.update(reservation_id = reserve)
                 return HttpResponse("success")
             else:
                 return HttpResponse("Your reservation limit already reached.")
